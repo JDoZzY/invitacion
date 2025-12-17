@@ -1,9 +1,15 @@
 :root {
-    --bg-color: #fdfbf7; /* Creamy white */
-    --accent-color: #d4af37; /* Classic Gold */
-    --text-primary: #2c2c2c; /* Charcoal for readability */
-    --text-secondary: #666666;
-    --card-bg: rgba(255, 255, 255, 0.95);
+    --bg-color: #fdfbf7;
+    --accent-color: #d4af37;
+    /* Gold remains as an accent */
+    --pastel-pink: #ffd1dc;
+    --pastel-blue: #aec6cf;
+    --pastel-green: #77dd77;
+    --text-primary: #5c5c5c;
+    /* Softer text */
+    --text-secondary: #8a8a8a;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    /* More transparent for glassmorphism */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -35,10 +41,12 @@ body {
     height: 100vh;
     z-index: -1;
     background: #fdfbf7;
-    background-image: url('fondo.jpg'); /* Using the primary background image */
+    background-image: url('assets/fondo.png');
+    /* Using the primary background image */
     background-size: cover;
     background-position: center;
-    filter: opacity(0.5); /* Soften the image so text pops */
+    filter: opacity(0.5);
+    /* Soften the image so text pops */
 }
 
 /* Container */
@@ -52,7 +60,9 @@ body {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: var(--font-heading);
     color: var(--text-primary);
     font-weight: 400;
@@ -93,11 +103,14 @@ h1, h2, h3 {
 /* Cards (Clean White Look) */
 .card {
     background: var(--card-bg);
-    border-radius: 4px; /* Crisp edges for wedding elegance */
+    border-radius: 16px;
+    /* Soft rounded corners */
     padding: 4rem 2rem;
     margin: 4rem 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Very subtle shadow */
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .detail-item {
@@ -112,7 +125,8 @@ h1, h2, h3 {
     font-size: 2rem;
     display: block;
     margin-bottom: 1rem;
-    filter: grayscale(100%); /* Minimalist icons */
+    filter: grayscale(100%);
+    /* Minimalist icons */
     opacity: 0.6;
 }
 
@@ -196,25 +210,61 @@ h3 {
 }
 
 .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
 }
 
 .grid-item {
+    position: relative;
+    max-width: 45%;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    border: 8px solid #fff;
+    /* Polaroid styling */
+}
+
+.grid-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--accent-color);
+    margin: -5px;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
 }
 
 .grid-item img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
     transition: transform 0.8s;
+    filter: sepia(20%);
+    /* Nostalgic touch */
+}
+
+.grid-item:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+    /* Gold glow */
+}
+
+.grid-item:hover::before {
+    opacity: 1;
+    margin: 10px;
 }
 
 .grid-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    filter: sepia(0%);
 }
 
 /* RSVP Button - Elegant */
@@ -238,13 +288,13 @@ h3 {
 .cta-button:hover {
     background: var(--accent-color);
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
 .footer {
     padding: 3rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     width: 100%;
     margin-top: auto;
     color: var(--text-secondary);
@@ -259,7 +309,8 @@ h3 {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.95); /* Light overlay */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Light overlay */
     align-items: center;
     justify-content: center;
     opacity: 0;
@@ -327,7 +378,9 @@ h3 {
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 #confettiCanvas {
@@ -342,9 +395,69 @@ h3 {
 
 /* Responsive */
 @media(max-width: 600px) {
-    .title { font-size: 3.5rem; }
-    .title .highlight { font-size: 3rem; }
-    .card { padding: 2rem 1rem; }
-    .countdown-container { gap: 1.5rem; }
-    .time-unit span { font-size: 2rem; }
+    .title {
+        font-size: 3.5rem;
+    }
+
+    .title .highlight {
+        font-size: 3rem;
+    }
+
+    .card {
+        padding: 2rem 1rem;
+    }
+
+    .countdown-container {
+        gap: 1.5rem;
+    }
+
+    .time-unit span {
+        font-size: 2rem;
+    }
+}
+
+/* Floral Decorations */
+.flower-corner {
+    position: fixed;
+    width: 300px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.flower-corner.top-left {
+    top: -50px;
+    left: -50px;
+    transform: rotate(180deg);
+}
+
+.flower-corner.bottom-right {
+    bottom: -50px;
+    right: -50px;
+}
+
+/* Falling Petals Animation */
+.petal {
+    position: fixed;
+    top: -10vh;
+    z-index: 0;
+    opacity: 0.6;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg) translateX(100px);
+        opacity: 0;
+    }
 }

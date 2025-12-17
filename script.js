@@ -171,4 +171,23 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
+
+    // Falling Petals Logic
+    function createPetal() {
+        const petal = document.createElement('img');
+        petal.src = 'assets/flower-petal.svg';
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+        petal.style.opacity = Math.random();
+        petal.style.width = Math.random() * 20 + 10 + 'px';
+
+        document.body.appendChild(petal);
+
+        setTimeout(() => {
+            petal.remove();
+        }, 8000);
+    }
+
+    setInterval(createPetal, 300);
 });
