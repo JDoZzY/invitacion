@@ -157,11 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         startConfetti();
 
-        // Redirección a WhatsApp
+        // Redirección a WhatsApp (compatible con iOS y Android)
         const phoneNumber = "50256155387"; // Número de Guatemala actualizado
         const message = encodeURIComponent("¡Hola! Confirmo mi asistencia a la boda. ¡Nos vemos pronto! 🎉💍");
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
         setTimeout(() => {
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            // Usamos location.href que es más compatible con iOS
+            // window.open no funciona bien en iOS desde un setTimeout
+            window.location.href = whatsappUrl;
         }, 1500); // Esperamos un poco para que vea el confeti
     }
 
