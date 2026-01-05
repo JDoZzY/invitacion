@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Función principal de apertura
+    // Función principal de     apertura
     function openEnvelope() {
         if (!envelope.classList.contains('open')) {
             envelope.classList.add('open');
@@ -35,16 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
             playMusic();
 
-            // Reintento de seguridad a los 500ms y 1s para asegurar el audio
             setTimeout(playMusic, 500);
             setTimeout(playMusic, 1000);
         }
     }
 
-    // Eventos de Apertura (ELIMINADO SCROLL)
+    envelope.addEventListener('click', openEnvelope);
     envelope.addEventListener('click', openEnvelope);
 
-    // Control Manual de Música
+    // Control Manual de Música 
     musicBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (isPlaying) {
@@ -61,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Countdown Logic ---
     const targetDate = new Date("January 24, 2026 17:00:00").getTime();
 
     function updateCountdown() {
@@ -157,16 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         startConfetti();
 
-        // Redirección a WhatsApp (compatible con iOS y Android)
-        const phoneNumber = "50256155387"; // Número de Guatemala actualizado
+        const phoneNumber = "50256155387";
         const message = encodeURIComponent("¡Hola! Confirmo mi asistencia a la boda. ¡Nos vemos pronto! 🎉💍");
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
         setTimeout(() => {
-            // Usamos location.href que es más compatible con iOS
-            // window.open no funciona bien en iOS desde un setTimeout
             window.location.href = whatsappUrl;
-        }, 1500); // Esperamos un poco para que vea el confeti
+        }, 1500);
     }
 
     declineBtn.onclick = () => {
@@ -176,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         rsvpBtn.disabled = true;
     }
 
-    // --- Confetti Animation ---
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
 
