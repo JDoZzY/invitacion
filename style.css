@@ -165,9 +165,8 @@ h3 {
     font-size: 2rem;
     display: block;
     margin-bottom: 1rem;
-    filter: grayscale(100%);
-    /* Minimalist icons */
-    opacity: 0.6;
+    /* Minimalist icons - Gray filter removed */
+    opacity: 1;
 }
 
 h3 {
