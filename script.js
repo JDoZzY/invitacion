@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Redirección a WhatsApp
         const phoneNumber = "50256155387"; // Número de Guatemala actualizado
-        const message = encodeURIComponent("¡Hola! Confirmo mi asistencia a la boda de J y E. ¡Nos vemos pronto! 🎉💍");
+        const message = encodeURIComponent("¡Hola! Confirmo mi asistencia a la boda. ¡Nos vemos pronto! 🎉💍");
         setTimeout(() => {
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }, 1500); // Esperamos un poco para que vea el confeti
